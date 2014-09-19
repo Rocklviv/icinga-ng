@@ -1,13 +1,14 @@
 # icinga-cookbook
-Still in dev.
+Cookbook install's Icinga server on Debian/Ubuntu OS.
 
 ## Supported Platforms
-* Ubuntu 14.04
-* Debian 6
+* Ubuntu 12.04 / 14.04
+* Debian 6 / 7
 
 ## Attributes
 
-TODO: Descride attributes.
+```ruby default['icingaadmin']['name'] = 'Admin' ``` - Sets icinga admin username.
+```ruby default['icingaadmin']['password'] = 'Admin' ``` - Sets icinga admin password. 
 
 ## Usage
 

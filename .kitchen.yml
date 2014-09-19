@@ -14,9 +14,25 @@ platforms:
       cpus: 1
     network:
       - [ "public_network", bridge: 'en0: Ethernet' ]
+- name: ubuntu-12.04
+  driver:
+    box: ubuntu-12.04
+    customize:
+      memory: 512
+      cpus: 1
+    network:
+      - [ "public_network", bridge: 'en0: Ethernet' ]
 - name: debian-6.0.8
   driver:
     box: debian-6.0.8
+    customize:
+      memory: 512
+      cpus: 1
+    network:
+      - [ "public_network", bridge: 'en0: Ethernet' ]
+- name: debian-7.2.0
+  driver:
+    box: debian-7.2.0
     customize:
       memory: 512
       cpus: 1
