@@ -1,0 +1,59 @@
+ScriptAlias /icinga/cgi-bin "<%= node['icinga']['root'] %>/sbin"
+
+<Directory "<%= node['icinga']['root'] %>/sbin">
+#  SSLRequireSSL
+   Options ExecCGI
+   AllowOverride None
+
+   AuthName "Icinga Access"
+   AuthType Basic
+   AuthUserFile <%= node['icinga']['root'] %>/etc/htpasswd.users
+
+   <IfModule mod_authz_core.c>
+      # Apache 2.4
+      <RequireAll>
+         Require all granted
+         # Require local
+         Require valid-user
+      </RequireAll>
+   </IfModule>
+   <IfModule !mod_authz_core.c>
+      # Apache 2.2
+      Order allow,deny
+      Allow from all
+      #  Order deny,allow
+      #  Deny from all
+      #  Allow from 127.0.0.1
+      Require valid-user
+    </IfModule>
+ </Directory>
+
+Alias /icinga "<%= node['icinga']['root'] %>/share/"
+
+<Directory "<%= node['icinga']['root'] %>/share/">
+#  SSLRequireSSL
+   Options None
+   AllowOverride All
+
+   AuthName "Icinga Access"
+   AuthType Basic
+   AuthUserFile <%= node['icinga']['root'] %>/etc/htpasswd.users
+
+   <IfModule mod_authz_core.c>
+      # Apache 2.4
+      <RequireAll>
+         Require all granted
+         # Require local
+         Require valid-user
+      </RequireAll>
+   </IfModule>
+   <IfModule !mod_authz_core.c>
+      # Apache 2.2
+      Order allow,deny
+      Allow from all
+      #  Order deny,allow
+      #  Deny from all
+      #  Allow from 127.0.0.1
+      Require valid-user
+   </IfModule>
+</Directory>

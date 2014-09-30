@@ -1,3 +1,7 @@
+# 0.1.3
+* Fixed small issues.
+* Removed hardcoded lines.
+
 # 0.1.2
 * Added Debian 7 support.
 * Added Ubuntu 12 support.

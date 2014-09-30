@@ -16,3 +16,4 @@ gem 'berkshelf'
 
 gem 'test-kitchen'
 gem 'kitchen-vagrant'
+gem 'htauth', '~> 1.1.0'
