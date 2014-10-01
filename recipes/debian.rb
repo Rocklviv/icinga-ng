@@ -20,11 +20,11 @@ group node['icinga_sys']['group'] do
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{node['icinga']['source']['package_name']}" do 
-	source "#{node['icinga']['package']}"
+	source node['icinga']['package']
 end
 
 execute 'Untar icinga archive.' do 
-	cwd "#{Chef::Config[:file_cache_path]}"
+	cwd Chef::Config[:file_cache_path]
 	command "tar zxvf #{node['icinga']['source']['package_name']}"
 end
 
