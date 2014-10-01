@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: icinga
+# Cookbook Name:: icinga-ng
 # Recipe:: default
 #
 # Copyright (C) 2014 Denis Chekirda
@@ -8,5 +8,5 @@
 #
 
 if platform_family?("debian") 
-	include_recipe "icinga::debian"
+	include_recipe "icinga-ng::debian"
 end

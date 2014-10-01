@@ -1,8 +1,8 @@
-name             'icinga'
+name             'icinga-ng'
 maintainer       'Denis Chekirda'
 maintainer_email 'dchekirda@gmail.com'
 license          'All rights reserved'
-description      'Installs/Configures icinga server'
+description      'Installs/Configures icinga v1 server'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.1.3'
 

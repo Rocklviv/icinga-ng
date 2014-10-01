@@ -28,14 +28,14 @@ As default used latest icinga, v.1.11.7
 
 ## Usage
 
-### icinga::default
+### icinga-ng::default
 
 Include `icinga` in your node's `run_list`:
 
 ```json
 {
   "run_list": [
-    "recipe[icinga::default]"
+    "recipe[icinga-ng::default]"
   ]
 }
 ```
