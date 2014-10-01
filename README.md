@@ -1,4 +1,4 @@
-# icinga-cookbook
+# chef-icinga-cookbook
 Cookbook install's Icinga server on Debian/Ubuntu OS from source.
 As default used latest icinga, v.1.11.7
 
@@ -7,8 +7,10 @@ As default used latest icinga, v.1.11.7
 * Apt cookbook.
 
 ## Supported Platforms
-* Ubuntu 12.04 / 14.04
-* Debian 6 / 7
+* Ubuntu 12.04 
+* Ubuntu 14.04
+* Debian 6 
+* Debian 7
 
 ## Attributes
 

@@ -9,4 +9,4 @@
 
 # 0.1.0
 
-Initial release of icinga
+* Initial release of chef-icinga
