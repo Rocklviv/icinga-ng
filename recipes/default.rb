@@ -9,4 +9,6 @@
 
 if platform_family?("debian") 
 	include_recipe "icinga-ng::debian"
+elsif platform_family?("rhel")
+	include_recipe "icinga-ng::rhel"
 end

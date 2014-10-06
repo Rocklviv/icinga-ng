@@ -5,7 +5,11 @@ default['icingaadmin']['name'] = 'icingaadmin'
 default['icingaadmin']['password'] = 'icingaadmin'
 
 # System settings
-default['packages'] = %w(apache2 build-essential mailutils libssl-dev openssl apache2-utils nagios-plugins)
+if platform_family?('debian')
+	default['packages'] = %w(build-essential mailutils libssl-dev openssl nagios-plugins)
+elsif platform_family?('rhel')
+  default['packages'] = %w(mailx openssl openssl-devel gcc gcc-c++ make kernel-devel nagios-plugins-all)
+end
 
 # Icinga directories.
 default['icinga']['root'] = '/opt/icinga'
@@ -17,7 +21,12 @@ default['icinga']['htpasswd'] = node['icinga']['root'] + '/etc/htpasswd.users'
 default['icinga_sys']['user'] = 'icinga'
 default['icinga_sys']['password'] = 'icinga'
 default['icinga_sys']['group'] = 'icinga-cmd'
-default['nagios_plugins']['root'] = '/usr/lib/nagios/plugins'
+
+if platform_family?('debian')
+	default['nagios_plugins']['root'] = '/usr/lib/nagios/plugins'
+elsif platform_family?('rhel')
+	default['nagios_plugins']['root'] = '/usr/lib64/nagios/plugins'
+end
 
 default['icinga']['source']['url'] = 'https://github.com/Icinga/icinga-core/releases/download/v'
 default['icinga']['source']['version'] = '1.11.7'
