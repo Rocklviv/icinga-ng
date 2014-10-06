@@ -5,6 +5,7 @@ As default used latest icinga, v.1.11.7
 ## Depends
 * Apache2 cookbook.
 * Apt cookbook.
+* Yum cookbook.
 
 ## Supported Platforms
 * Ubuntu 12.04 
