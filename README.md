@@ -6,11 +6,12 @@ As default used latest icinga, v.1.11.7
 * Apache2 cookbook.
 * Apt cookbook.
 * Yum cookbook.
+* Checkinstall cookbook.
 
 ## Supported Platforms
-* Ubuntu 12.04 
+* Ubuntu 12.04
 * Ubuntu 14.04
-* Debian 6 
+* Debian 6
 * Debian 7
 * CentOS 6
 

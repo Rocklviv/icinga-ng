@@ -1,3 +1,6 @@
+# 0.1.5
+* Rewrited common recipe to user checkconfig instead of make.
+
 # 0.1.4
 * Added common recipe for debian/rhel recipes.
 * Added CentOS 6 support.
