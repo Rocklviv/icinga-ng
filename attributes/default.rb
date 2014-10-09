@@ -36,6 +36,6 @@ default['icinga']['package'] = node['icinga']['source']['url'] + node['icinga'][
 # Services
 if platform_family?('debian')
 	default['services'] = %w(apache2 icinga)
-else
+elsif platform_family?('rhel')
 	default['services'] = %w(httpd icinga)
 end

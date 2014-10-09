@@ -49,6 +49,6 @@ platforms:
 
 suites:
   - name: default
-    run_list: 
+    run_list:
     - recipe[icinga-ng]
     attributes:

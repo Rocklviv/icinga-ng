@@ -1,4 +1,6 @@
-user node['icinga_sys']['user'] do 
+include_recipe "checkinstall::default"
+
+user node['icinga_sys']['user'] do
 	password node['icinga_sys']['password']
 	action :create
 end
@@ -13,27 +15,54 @@ group node['icinga_sys']['group'] do
 	end
 end
 
-remote_file "#{Chef::Config[:file_cache_path]}/#{node['icinga']['source']['package_name']}" do 
+remote_file "#{Chef::Config[:file_cache_path]}/#{node['icinga']['source']['package_name']}" do
 	source node['icinga']['package']
 end
 
-execute 'Untar icinga archive.' do 
-	cwd Chef::Config[:file_cache_path]
-	command "tar zxvf #{node['icinga']['source']['package_name']}"
-end
-
-# TODO: rewrite to use checkinstall.
-execute "Build & install Icinga" do 
-	cwd "#{Chef::Config[:file_cache_path]}/icinga-#{node['icinga']['source']['version']}"
-	command "./configure --prefix=#{node['icinga']['root']} --enable-idoutils=no --with-command-group=icinga-cmd && make all && make fullinstall && make install-config"
-end
-
-directory "#{node['icinga']['root']}/var/rw" do 
-	mode 0750
+directory node['icinga']['root'] do
 	owner node['icinga_sys']['user']
+	group node['icinga_sys']['group']
+	action :create
+end
+
+checkinstall_package 'icinga' do
+	source_archive "#{Chef::Config[:file_cache_path]}/#{node['icinga']['source']['package_name']}"
+	configure_options "--prefix=#{node['icinga']['root']} --exec-prefix=#{node['icinga']['root']} --enable-idoutils=no --with-command-group=#{node['icinga_sys']['group']}"
+	version node['icinga']['source']['version']
+	binary_name "icinga"
+	checkinstall true
+	cmake false
+	autoconf false
+  autoheader false
+  make true
+  configure true
+	make_options "all install-init install-config install-commandmode"
+	if platform_family?('rhel')
+		options '--exclude=/selinux'
+	end
+end
+
+if platform_family?('debian')
+	dpkg_package "#{Chef::Config[:file_cache_path]}/icinga-#{node['icinga']['source']['version']}/icinga_#{node['icinga']['source']['version']}-1_amd64.deb" do
+		action :install
+	end
+elsif platform_family?('rhel')
+	rpm_package "/root/rpmbuild/RPMS/x86_64/icinga-#{node['icinga']['source']['version']}-1.x86_64.rpm" do
+		action :install
+	end
+end
+
+directory "#{node['icinga']['root']}/var/rw" do
+	mode 0770
+	owner node['apache']['user']
 	group node['icinga_sys']['group']
 	recursive true
 	only_if { setPassword? }
+end
+
+file "#{node['icinga']['root']}/var/rw/icinga.rw" do
+	mode 0770
+	action :create
 end
 
 template node['icinga']['resource_cfg'] do
@@ -45,9 +74,9 @@ template node['icinga']['resource_cfg'] do
 		'plugins' => node['nagios_plugins']['root']
 	)
 	action :create
-end 
+end
 
-template node['icinga']['cgi_cfg'] do 
+template node['icinga']['cgi_cfg'] do
 	source 'cgi.cfg.erb'
 	owner node['icinga_sys']['user']
 	group node['icinga_sys']['user']
@@ -59,7 +88,7 @@ template node['icinga']['cgi_cfg'] do
 	action :create
 end
 
-apache_conf 'icinga' do 
+apache_conf 'icinga' do
 	enable true
 end
 
