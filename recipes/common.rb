@@ -53,16 +53,13 @@ elsif platform_family?('rhel')
 end
 
 directory "#{node['icinga']['root']}/var/rw" do
-	mode 0770
-	owner node['apache']['user']
-	group node['icinga_sys']['group']
-	recursive true
+	owner node['icinga_sys']['user']
+	group node['apache']['group']
 	only_if { setPassword? }
 end
 
-file "#{node['icinga']['root']}/var/rw/icinga.rw" do
-	mode 0770
-	action :create
+execute "Permissions" do
+	command "chmod g+sx #{node['icinga']['root']}/var/rw"
 end
 
 template node['icinga']['resource_cfg'] do
