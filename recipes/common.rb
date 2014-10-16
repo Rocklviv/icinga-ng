@@ -39,6 +39,10 @@ checkinstall_package 'icinga' do
 	make_options "all install-init install-config install-commandmode"
 	if platform_family?('rhel')
 		options '--exclude=/selinux'
+	elsif platform_family?('debian')
+		if platform?('debian')
+			options '-D --install=no --fstrans=no --reset-uids=yes'
+		end
 	end
 end
 
