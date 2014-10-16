@@ -3,7 +3,7 @@
 * Fixed build of icinga with Checkinstall in Debian 6/7 os.
 
 # 0.1.5
-* Rewrited common recipe to user checkconfig instead of make.
+* Rewrited common recipe to user Checkinstall instead of make.
 
 # 0.1.4
 * Added common recipe for debian/rhel recipes.
