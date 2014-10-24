@@ -27,7 +27,7 @@ end
 
 checkinstall_package 'icinga' do
 	source_archive "#{Chef::Config[:file_cache_path]}/#{node['icinga']['source']['package_name']}"
-	configure_options "--prefix=#{node['icinga']['root']} --exec-prefix=#{node['icinga']['root']} --enable-idoutils=no --with-command-group=#{node['icinga_sys']['group']}"
+	configure_options "--prefix=#{node['icinga']['root']} --exec-prefix=#{node['icinga']['root']} --enable-idoutils=#{node['icinga']['idoutils']} --with-command-group=#{node['icinga_sys']['group']} --with-gd-lib=/usr/local/include/"
 	version node['icinga']['source']['version']
 	binary_name "icinga"
 	checkinstall true
@@ -36,7 +36,7 @@ checkinstall_package 'icinga' do
   autoheader false
   make true
   configure true
-	make_options "all install-init install-config install-commandmode"
+	make_options node['make']['options']
 	if platform_family?('rhel')
 		options '--exclude=/selinux'
 	elsif platform_family?('debian')

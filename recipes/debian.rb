@@ -2,9 +2,9 @@ include_recipe 'apt::default'
 include_recipe 'apache2'
 chef_gem 'htauth'
 
-node['packages'].each do |pkgs| 
-	package pkgs do 
-		action :upgrade
+node['packages'].each do |pkgs|
+	package pkgs do
+		action :install
 	end
 end
 

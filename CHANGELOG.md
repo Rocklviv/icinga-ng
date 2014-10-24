@@ -1,3 +1,6 @@
+# 0.1.7
+* Fixed issue with missing cgis.
+
 # 0.1.6
 * Fixed permissions for External Command Interface.
 * Fixed build of icinga with Checkinstall in Debian 6/7 os.
